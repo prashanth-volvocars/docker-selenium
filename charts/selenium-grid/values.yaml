@@ -369,17 +369,17 @@ chromeNode:
     # failureThreshold: 120
     # periodSeconds: 5
   # Time to wait for pod termination
-  terminationGracePeriodSeconds: 30
+  terminationGracePeriodSeconds: 3600
   # Allow pod correctly shutdown
-  lifecycle: {}
-    # preStop:
-    #   exec:
-    #     command:
-    #       - bash
-    #       - -c
-    #       - |
-    #         curl -X POST 127.0.0.1:5555/se/grid/node/drain --header 'X-REGISTRATION-SECRET;' && \
-    #         while curl 127.0.0.1:5555/status; do sleep 1; done
+  lifecycle: 
+    preStop:
+      exec:
+        command:
+          - bash
+          - -c
+          - |
+            curl -X POST 127.0.0.1:5555/se/grid/node/drain --header 'X-REGISTRATION-SECRET;' && \
+            while curl 127.0.0.1:5555/status; do sleep 1; done
 
   extraVolumeMounts: []
   # - name: my-extra-volume
@@ -391,6 +391,14 @@ chromeNode:
   # - name: my-extra-volume-from-pvc
   #   persistentVolumeClaim:
   #     claimName: my-pv-claim
+
+  # Keda scaled object configuration
+  maxReplicaCount: 8
+  hpa:
+    url: http://selenium-hub.default:4444/graphql # Repalce your http graphql url here
+    browserName: chrome
+    # browserVersion: '91.0' # Optional. Only required when supporting multiple versions of browser in your Selenium Grid.
+    unsafeSsl : 'true' # Optional
 
 # Configuration for firefox nodes
 firefoxNode:
@@ -475,17 +483,17 @@ firefoxNode:
     # failureThreshold: 120
     # periodSeconds: 5
   # Time to wait for pod termination
-  terminationGracePeriodSeconds: 30
+  terminationGracePeriodSeconds: 3600
   # Allow pod correctly shutdown
-  lifecycle: {}
-    # preStop:
-    #   exec:
-    #     command:
-    #       - bash
-    #       - -c
-    #       - |
-    #         curl -X POST 127.0.0.1:5555/se/grid/node/drain --header 'X-REGISTRATION-SECRET;' && \
-    #         while curl 127.0.0.1:5555/status; do sleep 1; done
+  lifecycle: 
+    preStop:
+      exec:
+        command:
+          - bash
+          - -c
+          - |
+            curl -X POST 127.0.0.1:5555/se/grid/node/drain --header 'X-REGISTRATION-SECRET;' && \
+            while curl 127.0.0.1:5555/status; do sleep 1; done
 
   extraVolumeMounts: []
   # - name: my-extra-volume
@@ -497,6 +505,12 @@ firefoxNode:
   # - name: my-extra-volume-from-pvc
   #   persistentVolumeClaim:
   #     claimName: my-pv-claim
+
+  # Keda scaled object configuration
+  maxReplicaCount: 8
+  hpa:
+    url: http://selenium-hub.default:4444/graphql # Repalce your http graphql url here
+    browserName: firefox
 
 # Configuration for edge nodes
 edgeNode:
@@ -581,17 +595,17 @@ edgeNode:
     # failureThreshold: 120
     # periodSeconds: 5
   # Time to wait for pod termination
-  terminationGracePeriodSeconds: 30
+  terminationGracePeriodSeconds: 3600
   # Allow pod correctly shutdown
-  lifecycle: {}
-    # preStop:
-    #   exec:
-    #     command:
-    #       - bash
-    #       - -c
-    #       - |
-    #         curl -X POST 127.0.0.1:5555/se/grid/node/drain --header 'X-REGISTRATION-SECRET;' && \
-    #         while curl 127.0.0.1:5555/status; do sleep 1; done
+  lifecycle: 
+    preStop:
+      exec:
+        command:
+          - bash
+          - -c
+          - |
+            curl -X POST 127.0.0.1:5555/se/grid/node/drain --header 'X-REGISTRATION-SECRET;' && \
+            while curl 127.0.0.1:5555/status; do sleep 1; done
 
   extraVolumeMounts: []
   # - name: my-extra-volume
@@ -603,6 +617,12 @@ edgeNode:
   # - name: my-extra-volume-from-pvc
   #   persistentVolumeClaim:
   #     claimName: my-pv-claim
+
+  # Keda scaled object configuration
+  maxReplicaCount: 8
+  hpa:
+    url: http://selenium-hub.default:4444/graphql # Repalce your http graphql url here
+    browserName: edge
 
 # Custom labels for k8s resources
 customLabels: {}
