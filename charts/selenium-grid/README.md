@@ -94,6 +94,10 @@ This table contains the configuration parameters of the chart and their default 
 | `chromeNode.lifecycle`                  | `{}`                               | hooks to make pod correctly shutdown or started                                                                            |
 | `chromeNode.extraVolumeMounts`          | `[]`                               | Extra mounts of declared ExtraVolumes into pod                                                                             |
 | `chromeNode.extraVolumes`               | `[]`                               | Extra Volumes declarations to be used in the pod (can be any supported volume type: ConfigMap, Secret, PVC, NFS, etc.)     |
+| `chromeNode.hpa.url`                    | `http://selenium-hub.default:4444/graphql` | Graphql Url of the hub or the router |
+| `chromeNode.hpa.browserName`            | `chrome`                           | BrowserName from the capability |
+| `chromeNode.hpa.browserVersion`         | ``                                 | BrowserVersion from the capability |
+| `chromeNode.maxReplicaCount`            | `8`                                | Max number of replicas that this browsernode can auto scale up to |
 | `firefoxNode.enabled`                   | `true`                             | Enable firefox nodes                                                                                                       |
 | `firefoxNode.replicas`                  | `1`                                | Number of firefox nodes                                                                                                    |
 | `firefoxNode.imageName`                 | `selenium/node-firefox`            | Image of firefox nodes                                                                                                     |
@@ -121,6 +125,10 @@ This table contains the configuration parameters of the chart and their default 
 | `firefoxNode.lifecycle`                 | `{}`                               | hooks to make pod correctly shutdown or started                                                                            |
 | `firefoxNode.extraVolumeMounts`         | `[]`                               | Extra mounts of declared ExtraVolumes into pod                                                                             |
 | `firefoxNode.extraVolumes`              | `[]`                               | Extra Volumes declarations to be used in the pod (can be any supported volume type: ConfigMap, Secret, PVC, NFS, etc.)     |
+| `firefoxNode.hpa.url`                   | `http://selenium-hub.default:4444/graphql` | Graphql Url of the hub or the router |
+| `firefoxNode.hpa.browserName`           | `firefox`                          | BrowserName from the capability |
+| `firefoxNode.hpa.browserVersion`        | ``                                 | BrowserVersion from the capability |
+| `firefoxNode.maxReplicaCount`           | `8`                                | Max number of replicas that this browsernode can auto scale up to |
 | `edgeNode.enabled`                      | `true`                             | Enable edge nodes                                                                                                          |
 | `edgeNode.replicas`                     | `1`                                | Number of edge nodes                                                                                                       |
 | `edgeNode.imageName`                    | `selenium/node-edge`               | Image of edge nodes                                                                                                        |
@@ -148,6 +156,10 @@ This table contains the configuration parameters of the chart and their default 
 | `edgeNode.lifecycle`                    | `{}`                               | hooks to make pod correctly shutdown or started                                                                            |
 | `edgeNode.extraVolumeMounts`            | `[]`                               | Extra mounts of declared ExtraVolumes into pod                                                                             |
 | `edgeNode.extraVolumes`                 | `[]`                               | Extra Volumes declarations to be used in the pod (can be any supported volume type: ConfigMap, Secret, PVC, NFS, etc.)     |
+| `edgeNode.hpa.url`                     | `http://selenium-hub.default:4444/graphql` | Graphql Url of the hub or the router |
+| `edgeNode.hpa.browserName`             | `edge`                           | BrowserName from the capability |
+| `edgeNode.hpa.browserVersion`          | ``                               | BrowserVersion from the capability |
+| `edgeNode.maxReplicaCount`             | `8`                                | Max number of replicas that this browsernode can auto scale up to |
 | `customLabels`                          | `{}`                               | Custom labels for k8s resources                                                                                            |
 
 
