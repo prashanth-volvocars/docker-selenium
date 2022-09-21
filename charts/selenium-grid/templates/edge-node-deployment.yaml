@@ -28,6 +28,8 @@ spec:
           {{ toYaml . | nindent 8 }}
         {{- end }}
     spec:
+      automountServiceAccountToken: {{ .Values.edgeNode.automountServiceAccountToken }}
+      serviceAccount: {{ .Values.edgeNode.serviceAccount }}
     {{- with .Values.edgeNode.hostAliases }}
       hostAliases: {{ toYaml . | nindent 8 }}
     {{- end }}
@@ -61,10 +63,10 @@ spec:
         {{- with .Values.edgeNode.resources }}
           resources: {{- toYaml . | nindent 12 }}
         {{- end }}
-        {{- with .Values.chromeNode.lifecycle }}
+        {{- with .Values.edgeNode.lifecycle }}
           lifecycle: {{- toYaml . | nindent 12 }}
         {{- end }}
-        {{- with .Values.chromeNode.startupProbe }}
+        {{- with .Values.edgeNode.startupProbe }}
           startupProbe: {{- toYaml . | nindent 12 }}
         {{- end }}
     {{- with .Values.edgeNode.nodeSelector }}

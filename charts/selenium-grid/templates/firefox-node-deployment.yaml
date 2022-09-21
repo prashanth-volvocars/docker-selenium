@@ -28,6 +28,8 @@ spec:
           {{ toYaml . | nindent 8 }}
         {{- end }}
     spec:
+      automountServiceAccountToken: {{ .Values.firefoxNode.automountServiceAccountToken }}
+      serviceAccount: {{ .Values.firefoxNode.serviceAccount }}
     {{- with .Values.firefoxNode.hostAliases }}
       hostAliases: {{ toYaml . | nindent 8 }}
     {{- end }}
@@ -61,10 +63,10 @@ spec:
         {{- with .Values.firefoxNode.resources }}
           resources: {{- toYaml . | nindent 12 }}
         {{- end }}
-        {{- with .Values.chromeNode.lifecycle }}
+        {{- with .Values.firefoxNode.lifecycle }}
           lifecycle: {{- toYaml . | nindent 12 }}
         {{- end }}
-        {{- with .Values.chromeNode.startupProbe }}
+        {{- with .Values.firefoxNode.startupProbe }}
           startupProbe: {{- toYaml . | nindent 12 }}
         {{- end }}
     {{- with .Values.firefoxNode.nodeSelector }}
