@@ -52,7 +52,7 @@ For now, global configuration supported is:
 | Parameter                             | Default                            | Description                           |
 | -----------------------------------   | ---------------------------------- | ------------------------------------- |
 | `global.seleniumGrid.imageTag`        | `4.4.0-20220831`                   | Image tag for all selenium components |
-| `global.seleniumGrid.nodesImageTag`   | `4.4.0-20220831`                   | Image tag for browser's nodes         |
+| `global.seleniumGrid.nodesImageTag`   | `4.4.0-20220921`                   | Image tag for browser's nodes         |
 | `global.seleniumGrid.imagePullSecret` | `""`                               | Pull secret to be used for all images |
 
 This table contains the configuration parameters of the chart and their default values:
@@ -66,11 +66,12 @@ This table contains the configuration parameters of the chart and their default 
 | `ingress.annotations`                   | `{}`                               | Custom annotations for ingress resource                                                                                    |
 | `ingress.hostname`                      | `selenium-grid.local`              | Default host for the ingress resource                                                                                      |
 | `ingress.tls`                           | `[]`                               | TLS backend configuration for ingress resource                                                                             |
+| `ingress.path`                          | `/`                                | Default path for ingress resource                                                                             |
 | `busConfigMap.annotations`              | `{}`                               | Custom annotations for configmap                                                                                           |
 | `chromeNode.enabled`                    | `true`                             | Enable chrome nodes                                                                                                        |
 | `chromeNode.replicas`                   | `1`                                | Number of chrome nodes                                                                                                     |
-| `chromeNode.imageName`                  | `selenium/node-chrome`             | Image of chrome nodes                                                                                                      |
-| `chromeNode.imageTag`                   | `4.4.0-20220831`                   | Image of chrome nodes                                                                                                      |
+| `chromeNode.imageName`                  | `prashanth0007/node-chrome`        | Image of chrome nodes                                                                                                      |
+| `chromeNode.imageTag`                   | `4.4.0-20220921`                   | Image of chrome nodes                                                                                                      |
 | `chromeNode.imagePullPolicy`            | `IfNotPresent`                     | Image pull policy (see https://kubernetes.io/docs/concepts/containers/images/#updating-images)                             |
 | `chromeNode.imagePullSecret`            | `""`                               | Image pull secret (see https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry)               |
 | `chromeNode.ports`                      | `[5555]`                           | Port list to enable on container                                                                                           |
@@ -98,10 +99,12 @@ This table contains the configuration parameters of the chart and their default 
 | `chromeNode.hpa.browserName`            | `chrome`                           | BrowserName from the capability |
 | `chromeNode.hpa.browserVersion`         | ``                                 | BrowserVersion from the capability |
 | `chromeNode.maxReplicaCount`            | `8`                                | Max number of replicas that this browsernode can auto scale up to |
+| `chromeNode.automountServiceAccountToken`| `false`                           | Determines automounting of service account token |
+| `chromeNode.serviceAccount`             | ``                                 | Service account for chrome container |
 | `firefoxNode.enabled`                   | `true`                             | Enable firefox nodes                                                                                                       |
 | `firefoxNode.replicas`                  | `1`                                | Number of firefox nodes                                                                                                    |
-| `firefoxNode.imageName`                 | `selenium/node-firefox`            | Image of firefox nodes                                                                                                     |
-| `firefoxNode.imageTag`                  | `4.4.0-20220831`                   | Image of firefox nodes                                                                                                     |
+| `firefoxNode.imageName`                 | `prashanth0007/node-firefox`       | Image of firefox nodes                                                                                                     |
+| `firefoxNode.imageTag`                  | `4.4.0-20220921`                   | Image of firefox nodes                                                                                                     |
 | `firefoxNode.imagePullPolicy`           | `IfNotPresent`                     | Image pull policy (see https://kubernetes.io/docs/concepts/containers/images/#updating-images)                             |
 | `firefoxNode.imagePullSecret`           | `""`                               | Image pull secret (see https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry)               |
 | `firefoxNode.ports`                     | `[5555]`                           | Port list to enable on container                                                                                           |
@@ -129,10 +132,12 @@ This table contains the configuration parameters of the chart and their default 
 | `firefoxNode.hpa.browserName`           | `firefox`                          | BrowserName from the capability |
 | `firefoxNode.hpa.browserVersion`        | ``                                 | BrowserVersion from the capability |
 | `firefoxNode.maxReplicaCount`           | `8`                                | Max number of replicas that this browsernode can auto scale up to |
+| `firefoxNode.automountServiceAccountToken`| `false`                           | Determines automounting of service account token |
+| `firefoxNode.serviceAccount`             | ``                                 | Service account for firefox container |
 | `edgeNode.enabled`                      | `true`                             | Enable edge nodes                                                                                                          |
 | `edgeNode.replicas`                     | `1`                                | Number of edge nodes                                                                                                       |
-| `edgeNode.imageName`                    | `selenium/node-edge`               | Image of edge nodes                                                                                                        |
-| `edgeNode.imageTag`                     | `4.4.0-20220831`                   | Image of edge nodes                                                                                                        |
+| `edgeNode.imageName`                    | `prashanth0007/node-edge`          | Image of edge nodes                                                                                                        |
+| `edgeNode.imageTag`                     | `4.4.0-20220921`                   | Image of edge nodes                                                                                                        |
 | `edgeNode.imagePullPolicy`              | `IfNotPresent`                     | Image pull policy (see https://kubernetes.io/docs/concepts/containers/images/#updating-images)                             |
 | `edgeNode.imagePullSecret`              | `""`                               | Image pull secret (see https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry)               |
 | `edgeNode.ports`                        | `[5555]`                           | Port list to enable on container                                                                                           |
@@ -160,6 +165,8 @@ This table contains the configuration parameters of the chart and their default 
 | `edgeNode.hpa.browserName`             | `edge`                           | BrowserName from the capability |
 | `edgeNode.hpa.browserVersion`          | ``                               | BrowserVersion from the capability |
 | `edgeNode.maxReplicaCount`             | `8`                                | Max number of replicas that this browsernode can auto scale up to |
+| `edgeNode.automountServiceAccountToken`| `false`                           | Determines automounting of service account token |
+| `edgeNode.serviceAccount`              | ``                                 | Service account for edge container |
 | `customLabels`                          | `{}`                               | Custom labels for k8s resources                                                                                            |
 
 
