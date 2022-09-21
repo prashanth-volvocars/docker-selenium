@@ -87,7 +87,7 @@ spec:
     {{- with .Values.firefoxNode.priorityClassName }}
       priorityClassName: {{ . }}
     {{- end }}
-      terminationGracePeriodSeconds: {{ .Values.chromeNode.terminationGracePeriodSeconds }}
+      terminationGracePeriodSeconds: {{ .Values.firefoxNode.terminationGracePeriodSeconds }}
       volumes:
         - name: dshm
           emptyDir:

@@ -87,7 +87,7 @@ spec:
     {{- with .Values.edgeNode.priorityClassName }}
       priorityClassName: {{ . }}
     {{- end }}
-      terminationGracePeriodSeconds: {{ .Values.chromeNode.terminationGracePeriodSeconds }}
+      terminationGracePeriodSeconds: {{ .Values.edgeNode.terminationGracePeriodSeconds }}
       volumes:
         - name: dshm
           emptyDir:

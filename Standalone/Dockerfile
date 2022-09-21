@@ -1,3 +1,10 @@
+ARG NAMESPACE
+ARG VERSION
+ARG AUTHORS
+ARG BASE
+FROM ${NAMESPACE}/${BASE}:${VERSION}
+LABEL authors=${AUTHORS}
+
 USER 1200
 
 #====================================
