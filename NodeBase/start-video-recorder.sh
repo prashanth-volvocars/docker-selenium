@@ -27,9 +27,16 @@ last_session_id=""
 video_file_name=""
 while true;
 do
-	session_id=$(curl -s --request GET 'http://localhost:5555/status' | jq -r '.[]?.node?.slots | .[0]?.session?.sessionId')
+	session=$(curl -s --request GET 'http://localhost:5555/status' | jq -r '.value.nodes[0].slots[0].session')
+	session_id=$(jq -r '.sessionId' <<< $session)
+	script_timeout=$(jq -r '.capabilities.timeouts.script' <<< $session)
 	echo $session_id
-	if [ $session_id != "null" -a $session_id != "" ] && [ $recording_started = "false" ];
+	echo $script_timeout
+	if [ $script_timeout = "30001" ];
+	then
+		start_recording="true"
+	fi
+	if [ $session_id != "null" -a $session_id != "" ] && [ $start_recording = "true" ]&& [ $recording_started = "false" ];
 	then
 		echo 'Starting to record video'
 		video_file_name="/tmp/$session_id.mp4"
