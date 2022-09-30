@@ -12,19 +12,20 @@ return_code=1
 max_attempts=50
 attempts=0
 echo 'Checking if the display is open...'
-until [ $return_code -eq 0 -o $attempts -eq $max_attempts ]; do
-	xset -display :${DISPLAY_NUM} b off > /dev/null 2>&1
-	return_code=$?
-	if [ $return_code -ne 0 ]; then
-		echo 'Waiting before next display check...'
-		sleep 0.5
-	fi
-	attempts=$((attempts+1))
-done
+# until [ $return_code -eq 0 -o $attempts -eq $max_attempts ]; do
+# 	xset -display :${DISPLAY_NUM} b off > /dev/null 2>&1
+# 	return_code=$?
+# 	if [ $return_code -ne 0 ]; then
+# 		echo 'Waiting before next display check...'
+# 		sleep 0.5
+# 	fi
+# 	attempts=$((attempts+1))
+# done
 
 recording_started="false"
 last_session_id=""
 video_file_name=""
+start_recording="false"
 while true;
 do
 	session=$(curl -s --request GET 'http://localhost:5555/status' | jq -r '.value.nodes[0].slots[0].session')
@@ -32,11 +33,11 @@ do
 	script_timeout=$(jq -r '.capabilities.timeouts.script' <<< $session)
 	echo $session_id
 	echo $script_timeout
-	if [ $script_timeout = "30001" ];
+	if [ "$script_timeout" = "30001" ];
 	then
 		start_recording="true"
 	fi
-	if [ $session_id != "null" -a $session_id != "" ] && [ $start_recording = "true" ]&& [ $recording_started = "false" ];
+	if [ "$session_id" != "null" -a "$session_id" != "" -a "$recording_started" = "false" ];
 	then
 		echo 'Starting to record video'
 		video_file_name="/tmp/$session_id.mp4"
@@ -44,7 +45,7 @@ do
 		last_session_id=$session_id
 		recording_started="true"
 		echo 'Video recording started'
-	elif [ $session_id = "null" -o $session_id = "" ] && [ $recording_started = "true" ];
+	elif [ "$session_id" = "null" -o "$session_id" = "" ] && [ "$recording_started" = "true" ];
 	then
 		echo 'Stopping to record video'
 		pkill --signal INT ffmpeg
