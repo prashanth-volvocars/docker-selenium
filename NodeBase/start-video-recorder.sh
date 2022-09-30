@@ -12,15 +12,15 @@ return_code=1
 max_attempts=50
 attempts=0
 echo 'Checking if the display is open...'
-# until [ $return_code -eq 0 -o $attempts -eq $max_attempts ]; do
-# 	xset -display :${DISPLAY_NUM} b off > /dev/null 2>&1
-# 	return_code=$?
-# 	if [ $return_code -ne 0 ]; then
-# 		echo 'Waiting before next display check...'
-# 		sleep 0.5
-# 	fi
-# 	attempts=$((attempts+1))
-# done
+until [ $return_code -eq 0 -o $attempts -eq $max_attempts ]; do
+	xset -display :${DISPLAY_NUM} b off > /dev/null 2>&1
+	return_code=$?
+	if [ $return_code -ne 0 ]; then
+		echo 'Waiting before next display check...'
+		sleep 0.5
+	fi
+	attempts=$((attempts+1))
+done
 
 recording_started="false"
 last_session_id=""
