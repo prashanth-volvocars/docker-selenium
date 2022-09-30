@@ -28,16 +28,16 @@ video_file_name=""
 start_recording="false"
 while true;
 do
-	session=$(curl -s --request GET 'http://localhost:5555/status' | jq -r '.value.nodes[0].slots[0].session')
+	session=$(curl -s --request GET 'http://localhost:5555/status' | jq -r '.[]?.node?.slots | .[0]?.session')
 	session_id=$(jq -r '.sessionId' <<< $session)
 	script_timeout=$(jq -r '.capabilities.timeouts.script' <<< $session)
-	echo $session_id
-	echo $script_timeout
+	echo "sessionId=$session_id"
+	echo "scriptTimeout=$script_timeout"
 	if [ "$script_timeout" = "30001" ];
 	then
 		start_recording="true"
 	fi
-	if [ "$session_id" != "null" -a "$session_id" != "" -a "$recording_started" = "false" ];
+	if [ "$session_id" != "null" -a "$session_id" != "" -a "$recording_started" = "false" -a "$start_recording" = "true" ];
 	then
 		echo 'Starting to record video'
 		video_file_name="/tmp/$session_id.mp4"
@@ -61,6 +61,7 @@ do
 			echo 'Uploading to s3 disabled'
 		fi
 		recording_started="false"
+		start_recording="false"
 		echo 'Video recording stopped'
 	elif [ $recording_started = "true" ];
 	then
