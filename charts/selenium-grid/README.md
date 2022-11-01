@@ -39,6 +39,12 @@ the Grid in some other namespace make sure to update the value of `hpa.url` acco
 The hpa.url value is configured to work for grid installed in `default` namespace. If you are installing the grid in some other namespace make sure to update the value of hpa.url accordingly. 
 
 The `terminationGracePeriodSeconds` is set to 30 seconds by default. When scaling down, pods are choosen randomly by HPA. If the chosen pod is currently executing a test rather than being idle, then there is 30 seconds before the test is expected to complete. If your test is still executing after 30 seconds, it would result in failure as the pod will be killed. If you want to give more time for your tests to complete, you may set `terminationGracePeriodSeconds` to value upto 3600 seconds.
+## Enable Video Recording
+To enable video recording you can set `RECORD_VIDEO` env variable in the browser node container to `"true"`. You can specify the location to store the recorded video using `VIDEO_LOCATION` env variable. The videos will have name format of `<session_id>.mp4`.
+
+## Upload recorded videos to AWS S3
+If you have enabled video recording, you can also enable uploading them to S3 by setting `UPLOAD_TO_S3` env variable to `"true"`. You can specify the S3 bucket in 'S3_VIDEOS_BUCKET' env variable. You can specify your AWS credentials directly using the `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY` and 'AWS_DEFAULT_REGION' env variables. If you use [IRSA](https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html) based authentication, you can specify the service account using `serviceAccount` variable in the charts.
+
 ## Updating Selenium-Grid release
 
 Once you have a new chart version, you can update your selenium-grid running:
@@ -111,6 +117,8 @@ This table contains the configuration parameters of the chart and their default 
 | `chromeNode.hpa.browserName`            | `chrome`                           | BrowserName from the capability |
 | `chromeNode.hpa.browserVersion`         | ``                                 | BrowserVersion from the capability |
 | `chromeNode.maxReplicaCount`            | `8`                                | Max number of replicas that this browsernode can auto scale up to |
+| `chromeNode.automountServiceAccountToken`| `false`                           | Determines automounting of service account token |
+| `chromeNode.serviceAccount`             | ``                                 | Service account for chrome container |
 | `firefoxNode.enabled`                   | `true`                             | Enable firefox nodes                                                                                                       |
 | `firefoxNode.deploymentEnabled`         | `true`                             | Enable creation of Deployment for firefox nodes                                                                            |
 | `firefoxNode.replicas`                  | `1`                                | Number of firefox nodes                                                                                                    |
@@ -144,6 +152,8 @@ This table contains the configuration parameters of the chart and their default 
 | `firefoxNode.hpa.browserName`           | `firefox`                          | BrowserName from the capability |
 | `firefoxNode.hpa.browserVersion`        | ``                                 | BrowserVersion from the capability |
 | `firefoxNode.maxReplicaCount`           | `8`                                | Max number of replicas that this browsernode can auto scale up to |
+| `firefoxNode.automountServiceAccountToken`| `false`                           | Determines automounting of service account token |
+| `firefoxNode.serviceAccount`             | ``                                 | Service account for firefox container |
 | `edgeNode.enabled`                      | `true`                             | Enable edge nodes                                                                                                          |
 | `edgeNode.deploymentEnabled`            | `true`                             | Enable creation of Deployment for edge nodes                                                                               |
 | `edgeNode.replicas`                     | `1`                                | Number of edge nodes                                                                                                       |
@@ -177,6 +187,8 @@ This table contains the configuration parameters of the chart and their default 
 | `edgeNode.hpa.browserName`             | `edge`                           | BrowserName from the capability |
 | `edgeNode.hpa.browserVersion`          | ``                               | BrowserVersion from the capability |
 | `edgeNode.maxReplicaCount`             | `8`                                | Max number of replicas that this browsernode can auto scale up to |
+| `edgeNode.automountServiceAccountToken`| `false`                           | Determines automounting of service account token |
+| `edgeNode.serviceAccount`              | ``                                 | Service account for edge container |
 | `customLabels`                          | `{}`                               | Custom labels for k8s resources                                                                                            |
 
 

@@ -342,6 +342,14 @@ chromeNode:
     #     - "example.org"
   # Custom environment variables for chrome nodes
   extraEnvironmentVariables:
+    # - name: VIDEO_LOCATION
+    #   value: /tmp
+    # - name: RECORD_VIDEO
+    #   value: "false"
+    # - name: UPLOAD_TO_S3
+    #   value: "false"
+    # - name: S3_VIDEOS_BUCKET
+    #   value: s3://selenium-grid/videos/
     # - name: SE_JAVA_OPTS
     #   value: "-Xmx512m"
     # - name:
@@ -376,7 +384,7 @@ chromeNode:
     # failureThreshold: 120
     # periodSeconds: 5
   # Time to wait for pod termination
-  terminationGracePeriodSeconds: 30
+  terminationGracePeriodSeconds: 3600
   # Allow pod correctly shutdown
   lifecycle: 
     preStop:
@@ -407,6 +415,8 @@ chromeNode:
     browserName: chrome
     # browserVersion: '91.0' # Optional. Only required when supporting multiple versions of browser in your Selenium Grid.
     unsafeSsl : 'true' # Optional
+  automountServiceAccountToken: false
+  serviceAccount: ""
 
 # Configuration for firefox nodes
 firefoxNode:
@@ -463,6 +473,14 @@ firefoxNode:
     #     - "example.org"
   # Custom environment variables for firefox nodes
   extraEnvironmentVariables:
+    # - name: VIDEO_LOCATION
+    #   value: /tmp
+    # - name: RECORD_VIDEO
+    #   value: "false"
+    # - name: UPLOAD_TO_S3
+    #   value: "false"
+    # - name: S3_VIDEOS_BUCKET
+    #   value: s3://selenium-grid/videos/
     # - name: SE_JAVA_OPTS
     #   value: "-Xmx512m"
     # - name:
@@ -497,7 +515,7 @@ firefoxNode:
     # failureThreshold: 120
     # periodSeconds: 5
   # Time to wait for pod termination
-  terminationGracePeriodSeconds: 30
+  terminationGracePeriodSeconds: 3600
   # Allow pod correctly shutdown
   lifecycle: 
     preStop:
@@ -525,6 +543,9 @@ firefoxNode:
   hpa:
     url: http://selenium-hub.default:4444/graphql # Repalce your http graphql url here
     browserName: firefox
+  automountServiceAccountToken: false
+  serviceAccount: ""
+
 
 # Configuration for edge nodes
 edgeNode:
@@ -580,8 +601,14 @@ edgeNode:
     #     - "example.org"
   # Custom environment variables for edge nodes
   extraEnvironmentVariables:
-    # - name: SE_JAVA_OPTS
-    #   value: "-Xmx512m"
+    # - name: VIDEO_LOCATION
+    #   value: /tmp
+    # - name: RECORD_VIDEO
+    #   value: "false"
+    # - name: UPLOAD_TO_S3
+    #   value: "false"
+    # - name: S3_VIDEOS_BUCKET
+    #   value: s3://selenium-grid/videos/
     # - name:
     #   valueFrom:
     #     secretKeyRef:
@@ -615,7 +642,7 @@ edgeNode:
     # failureThreshold: 120
     # periodSeconds: 5
   # Time to wait for pod termination
-  terminationGracePeriodSeconds: 30
+  terminationGracePeriodSeconds: 3600
   # Allow pod correctly shutdown
   lifecycle: 
     preStop:
@@ -643,6 +670,8 @@ edgeNode:
   hpa:
     url: http://selenium-hub.default:4444/graphql # Repalce your http graphql url here
     browserName: MicrosoftEdge
+  automountServiceAccountToken: false
+  serviceAccount: ""
 
 # Custom labels for k8s resources
 customLabels: {}
