@@ -2,6 +2,17 @@ apiVersion: v1
 entries:
   selenium-grid:
   - apiVersion: v2
+    appVersion: 4.9.1-20230508
+    created: "2023-05-12T08:14:56.480412775Z"
+    description: A Helm chart for creating a Selenium Grid Server in Kubernetes
+    digest: 76e551689d1cc0fa89ccdf0e0740928f7230bd4d0ca6fedb2d831ee745e68780
+    icon: https://github.com/SeleniumHQ/docker-selenium/raw/trunk/logo.png
+    name: selenium-grid
+    type: application
+    urls:
+    - https://github.com/prashanth-volvocars/docker-selenium/releases/download/selenium-grid-0.16.1/selenium-grid-0.16.1.tgz
+    version: 0.16.1
+  - apiVersion: v2
     appVersion: 4.6.0-20221104
     created: "2022-11-05T08:09:13.196396675Z"
     description: A Helm chart for creating a Selenium Grid Server in Kubernetes
@@ -147,4 +158,4 @@ entries:
     urls:
     - https://github.com/SeleniumHQ/docker-selenium/releases/download/selenium-grid-0.3.0/selenium-grid-0.3.0.tgz
     version: 0.3.0
-generated: "2022-11-05T08:09:13.196559075Z"
+generated: "2023-05-12T08:14:56.480637787Z"
